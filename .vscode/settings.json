@@ -1,0 +1,29 @@
+{
+  "beautify.language": {
+    "html": [
+      "htm",
+      "html",
+      "django-html"
+    ]
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python",
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true
+  },
+  "python.pythonPath": ".venv/Scripts/activate",
+  "python.formatting.provider": "autopep8",
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "modifications",
+  "editor.formatOnType": true,
+  "editor.formatOnPaste": true,
+  "files.associations": {
+    "**/*.html": "html",
+    "**/templates/**/*.html": "django-html",
+    "**/templates/**/*": "django-txt",
+    "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+  },
+  "emmet.includeLanguages": {
+    "django-html": "html"
+  },
+}
