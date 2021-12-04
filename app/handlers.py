@@ -82,7 +82,7 @@ app.include_router(
 
 app.include_router(
     items.router,
-    prefix="/view/item",
+    prefix="/view/items",
     tags=["item"],
     responses={404: {"message": "Not found"}},
 )
