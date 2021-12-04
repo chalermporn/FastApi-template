@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, Header, HTTPException, Response, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from app.routers import fund
+from app.routers import fund, items
 from .routers import book, file
 from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime
@@ -12,18 +12,13 @@ import logging
 app = FastAPI(title="FastAPI Test Fund",
               description="Description and technical detail of APIs, Live on Medium | Author : Promlert Pearrukkrai",
               version="0.0.1")
-templates = Jinja2Templates(directory="templates")
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 @app.get("/api/v1/info")
 async def information():
     return {"app_name": app.title, "version": app.version, "documents_path": "/docs"}
-
-
-@app.get("/items/{id}", response_class=HTMLResponse)
-async def read_item(request: Request, id: str):
-    return templates.TemplateResponse("item.html", {"request": request, "id": id})
 
 
 @app.on_event("startup")
@@ -82,5 +77,12 @@ app.include_router(
     fund.router,
     prefix="/api/fund",
     tags=["fund"],
+    responses={404: {"message": "Not found"}},
+)
+
+app.include_router(
+    items.router,
+    prefix="/view/item",
+    tags=["item"],
     responses={404: {"message": "Not found"}},
 )
